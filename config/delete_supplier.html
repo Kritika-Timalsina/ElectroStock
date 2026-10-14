@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Delete Supplier | ElectroStock</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .confirmation-card {
+            background: white;
+            width: 100%;
+            max-width: 480px;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 25px;
+            margin-bottom: 15px;
+            color: #dc2626;
+        }
+
+        .message {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .supplier-name {
+            color: #222;
+            font-weight: bold;
+        }
+
+        .warning {
+            background: #fff7ed;
+            color: #9a3412;
+            border: 1px solid #fed7aa;
+            padding: 12px;
+            border-radius: 7px;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 11px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .delete-btn {
+            background: #dc2626;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background: #b91c1c;
+        }
+
+        .cancel-btn {
+            background: #e5e7eb;
+            color: #333;
+        }
+
+        .cancel-btn:hover {
+            background: #d1d5db;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="confirmation-card">
+
+        <div class="icon">🗑️</div>
+
+        <h1>Delete Supplier?</h1>
+
+        <p class="message">
+            Are you sure you want to delete
+            <span class="supplier-name">{{ supplier.name }}</span>?
+            This action cannot be undone.
+        </p>
+
+        <div class="warning">
+            <strong>Important:</strong>
+            Any products associated with this supplier will remain
+            in ElectroStock, but their supplier assignment will be removed.
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="buttons">
+
+                <button type="submit" class="btn delete-btn">
+                    Yes, Delete
+                </button>
+
+                <a href="{% url 'supplier_list' %}"
+                   class="btn cancel-btn">
+                    Cancel
+                </a>
+
+            </div>
+        </form>
+
+    </div>
+
+</body>
+
+</html>

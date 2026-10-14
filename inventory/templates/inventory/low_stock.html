@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Low Stock Alerts | ElectroStock</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6fb;
+            color: #1e293b;
+            padding: 30px;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        header p {
+            color: #cbd5e1;
+            margin-top: 8px;
+        }
+
+        .alert-box {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 18px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            overflow-x: auto;
+            border: 1px solid #e2e8f0;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th, td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #f8fafc;
+            color: #475569;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 35px;
+            color: #166534;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #2563eb;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>ElectroStock</h1>
+        <p>Electronic Inventory Management System</p>
+    </header>
+
+    <h2>Low Stock Alerts</h2>
+    <p style="margin-top: 8px;">
+        Products that need attention and may require restocking.
+    </p>
+
+    <div class="alert-box">
+        <strong>Attention:</strong>
+        {{ products|length }} product(s) are at or below their minimum stock level.
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Supplier</th>
+                    <th>Available Quantity</th>
+                    <th>Minimum Stock</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.category|default:"Uncategorized" }}</td>
+                    <td>{{ product.supplier|default:"Not assigned" }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>{{ product.minimum_stock }}</td>
+                    <td>
+                        <span class="badge">Low Stock</span>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="empty">
+                        Great news! All products have sufficient stock.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <a href="{% url 'dashboard' %}" class="back-link">
+        ← Back to Dashboard
+    </a>
+
+</body>
+</html>

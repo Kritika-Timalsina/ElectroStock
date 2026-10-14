@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectroStock | Dashboard</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6fb;
+            color: #1e293b;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 22px 40px;
+        }
+
+        header h1 {
+            font-size: 26px;
+        }
+
+        header p {
+            color: #cbd5e1;
+            margin-top: 6px;
+        }
+
+        main {
+            padding: 35px 40px;
+        }
+
+        .welcome {
+            margin-bottom: 30px;
+        }
+
+        .welcome h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            color: #64748b;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .card h3 {
+            color: #64748b;
+            font-size: 15px;
+            font-weight: normal;
+            margin-bottom: 18px;
+        }
+
+        .card .number {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .low-stock {
+            color: #dc2626;
+        }
+
+        .inventory-value {
+            margin-top: 25px;
+            background: #2563eb;
+            color: white;
+            padding: 28px;
+            border-radius: 12px;
+        }
+
+        .inventory-value p {
+            margin-bottom: 10px;
+        }
+
+        .inventory-value h2 {
+            font-size: 30px;
+        }
+
+        .actions {
+            margin-top: 30px;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .actions h3 {
+            margin-bottom: 15px;
+        }
+
+        .actions a {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 12px 18px;
+            border-radius: 7px;
+            margin: 5px 8px 5px 0;
+        }
+
+        .actions a:hover {
+            background: #1d4ed8;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+        }
+
+        @media (max-width: 600px) {
+            header, main {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>ElectroStock</h1>
+        <p>Electronic Inventory Management System</p>
+    </header>
+
+    <main>
+
+        <section class="welcome">
+            <h2>Dashboard</h2>
+            <p>Here's an overview of your electronic inventory.</p>
+        </section>
+
+        <section class="cards">
+
+            <div class="card">
+                <h3>Total Products</h3>
+                <p class="number">{{ total_products }}</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Categories</h3>
+                <p class="number">{{ total_categories }}</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Suppliers</h3>
+                <p class="number">{{ total_suppliers }}</p>
+            </div>
+
+            <div class="card">
+                <h3>Low Stock Products</h3>
+                <p class="number low-stock">{{ low_stock_products }}</p>
+            </div>
+
+        </section>
+
+        <section class="inventory-value">
+            <p>Total Inventory Value</p>
+            <h2>Rs. {{ inventory_value|floatformat:2 }}</h2>
+        </section>
+
+        <section class="actions">
+    <h3>Quick Actions</h3>
+    <p>Manage your electronic inventory.</p>
+
+    <a href="{% url 'add_product' %}">+ Add New Product</a>
+
+    <a href="/admin/inventory/product/">Manage Products</a>
+    <a href="/admin/inventory/category/">Manage Categories</a>
+    <a href="/admin/inventory/supplier/">Manage Suppliers</a>
+    <a href="{% url 'product_list' %}">View All Products</a>
+</section>
+
+    </main>
+
+    <footer>
+        ElectroStock &copy; 2026 | Inventory Management System
+    </footer>
+
+</body>
+</html>

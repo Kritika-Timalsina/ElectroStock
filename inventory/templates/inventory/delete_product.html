@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Delete Product | ElectroStock</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .confirmation-box {
+            background: white;
+            width: 100%;
+            max-width: 450px;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #1f2937;
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .product-name {
+            color: #111827;
+            font-weight: bold;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 11px 18px;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .cancel-btn {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .delete-btn {
+            background: #dc2626;
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background: #d1d5db;
+        }
+
+        .delete-btn:hover {
+            background: #b91c1c;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="confirmation-box">
+
+        <div class="icon">🗑️</div>
+
+        <h1>Delete Product?</h1>
+
+        <p>
+            Are you sure you want to delete
+            <span class="product-name">{{ product.name }}</span>?
+        </p>
+
+        <p>This action cannot be undone.</p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="buttons">
+
+                <a href="{% url 'product_list' %}" class="btn cancel-btn">
+                    Cancel
+                </a>
+
+                <button type="submit" class="btn delete-btn">
+                    Yes, Delete
+                </button>
+
+            </div>
+        </form>
+
+    </div>
+
+</body>
+</html>

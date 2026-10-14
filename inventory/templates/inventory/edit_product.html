@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product | ElectroStock</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6fb;
+            color: #1e293b;
+            padding: 30px;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        header p {
+            color: #cbd5e1;
+            margin-top: 8px;
+        }
+
+        .form-container {
+            background: white;
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .form-container h2 {
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        .field {
+            margin-bottom: 20px;
+        }
+
+        .field label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .field ul {
+            color: #dc2626;
+            margin: 8px 0 0 20px;
+        }
+
+        .errorlist {
+            color: #dc2626;
+            margin: 8px 0 0 20px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            padding: 12px 18px;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .save-button {
+            background: #2563eb;
+            color: white;
+        }
+
+        .cancel-button {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>ElectroStock</h1>
+        <p>Electronic Inventory Management System</p>
+    </header>
+
+    <div class="form-container">
+        <h2>Edit Product</h2>
+
+        <p class="description">
+            Update the information for {{ product.name }}.
+        </p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {{ form.non_field_errors }}
+
+            {% for field in form %}
+                <div class="field">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {{ field.errors }}
+
+                    {% if field.help_text %}
+                        <small>{{ field.help_text }}</small>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <div class="buttons">
+                <button type="submit" class="button save-button">
+                    Save Changes
+                </button>
+
+                <a href="{% url 'product_list' %}" class="button cancel-button">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
